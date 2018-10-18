@@ -1,3 +1,27 @@
+var train = [[1, 1, 1],
+             [1, 1, 0],
+             [1, 0, 1],
+             [0, 1, 1],
+
+             [-1,0,-1],
+             [-1,-1,0],
+             [0,-1,-1],
+
+             [0 , 0, 0],
+
+             [-1,-1,-1],
+             [-1, 0, 0],
+             [0, -1, 0],
+             [0 , 0,-1],
+             [-1, 0, 1],
+             [1 , 0,-1],
+             [0 , 1,-1],
+             [1 ,-1, 0],
+             [0 ,-1, 1],
+             [-1 ,1, 0]
+           ];
+
+var index = [[0],[0],[0],[0], [2],[2],[2], [1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1],[-1]];
 let print = (a)=>{ console.log(a); }
 const ann = function (args,indexLog,callLog) {
  return new Promise(function (resolve, reject) {
@@ -7,16 +31,8 @@ const ann = function (args,indexLog,callLog) {
           model.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }));
           model.compile({ optimizer: 'sgd', loss: 'binaryCrossentropy', lr: 0.1 });
           // Creating dataset
-          const xs = tf.tensor2d([[1, 1, 1],
-                                  [1, 1, 1],
-                                  [1, 1, 1],
-                                  [0, 0, 0],
-                                  [0, 0, 0],
-                                  [0, 0, 0],
-                                  [-2, -2, -2],
-                                  [-2, -2, -2],
-                                  [-2, -2, -2]]);
-          const ys = tf.tensor2d([[1], [1], [1], [0], [0], [0], [-2], [-2], [-2] ]);
+          const xs = tf.tensor2d(train);
+          const ys = tf.tensor2d(index);
           const target = tf.tensor2d(args);
           // Train the model
           model.fit(xs, ys, {

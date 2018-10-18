@@ -33,9 +33,11 @@ var app = new Vue({
             if(this.col.max >= this.row.max){
               Vue.set(this.cols[this.col.row], this.col.col, 1);
               Vue.set(this.max, this.col.row, this.col.max);
+              console.log('col - win',this.cols[this.col.row],this.col.col);
             }else{
               Vue.set(this.cols[this.row.row], this.row.col, 1);
               Vue.set(this.max, this.row.row, this.row.max);
+              console.log('row - win',this.cols[this.row.row],this.row.col);
             }
             this.row = undefined;
             this.col = undefined;
